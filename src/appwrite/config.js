@@ -1,4 +1,5 @@
-import conf from '../conf.js';
+import conf from '../conf/conf';
+
 import { Client, ID, Databases, Storage, Query } from 'appwrite';
 
 export class Service{
@@ -35,7 +36,7 @@ export class Service{
         }
     }
 
-    async updatePost( slug, {title, content, featuredImage, status, userId}){
+    async updatePost( slug, {title, content, featuredImage, status }){
         try {
             return await this.databases.updateDocument(
                 conf.appwriteDatabaseId,
@@ -74,10 +75,10 @@ export class Service{
                 conf.appwriteCollectionId,
                 slug
             )
-            return true
+            // return true
         } catch (error) {
             console.log("Appwrite Service :: getPost :: error", error);
-            return false;
+            // return false;
         }
     }
 
@@ -88,10 +89,10 @@ export class Service{
                 conf.appwriteCollectionId,
                 queries
             )
-            return true
+            // return true
         } catch (error) {
             console.log("Appwrite Service :: getPosts :: error", error);
-            return false;
+            // return false;
         }
     }
 
@@ -113,10 +114,11 @@ export class Service{
 
     async deleteFile(fileID){
         try {
-            return await this.bucket.createFile(
+            await this.bucket.deleteFile(
                 conf.appwriteBucketId,
                 fileID
             )
+            return true
         } catch (error) {
             console.log("Appwrite Service :: deleteFile :: error", error);
             return false;

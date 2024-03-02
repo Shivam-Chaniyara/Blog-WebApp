@@ -11,7 +11,7 @@ const authSlice = createSlice({
     reducers: {
         login: (state, action) => {
             state.status = true;
-            state.userData = action.payload;  // When variable name and payload variable name is same then we dont want want to write action.payload.variablename;
+            state.userData = action.payload.userData;  // When variable name and payload variable name is same then we dont want want to write action.payload.variablename;
         },
         logout: (state) =>{
             state.status = false;
